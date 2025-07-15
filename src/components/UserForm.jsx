@@ -1,27 +1,40 @@
-// UserForm.jsx
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
 function UserForm({ addUser, onCancel }) {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [ageError, setAgeError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.trim() && age) {
+
+    let isValid = true;
+    setNameError("");
+    setAgeError("");
+
+    if (!name.trim()) {
+      setNameError("Please enter a name.");
+      isValid = false;
+    }
+
+    if (age === "" || isNaN(age) || parseInt(age) < 0) {
+      setAgeError("Please enter a valid age.");
+      isValid = false;
+    }
+
+    if (isValid) {
       addUser(name.trim(), age);
       setName("");
       setAge("");
-    } else {
-      alert("Please fill in both fields.");
     }
   };
 
   return (
     <form className="user-form" onSubmit={handleSubmit}>
-      {/* Back arrow */}
       <button type="button" onClick={onCancel} className="back-button">
-        <FaArrowLeft style={{ marginRight: "8px" }} />
+        <FaArrowLeft className="icon-left" />
         Back
       </button>
 
@@ -32,8 +45,9 @@ function UserForm({ addUser, onCancel }) {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Enter name"
+          placeholder={nameError || "Enter name"}
         />
+        {nameError && <p className="error-text">{nameError}</p>}
       </div>
 
       <div className="form-control">
@@ -43,8 +57,10 @@ function UserForm({ addUser, onCancel }) {
           type="number"
           value={age}
           onChange={(e) => setAge(e.target.value)}
-          placeholder="Enter age"
+          placeholder={ageError || "Enter age"}
+          min="0"
         />
+        {ageError && <p className="error-text">{ageError}</p>}
       </div>
 
       <button className="form-button" type="submit">

@@ -75,7 +75,7 @@ function UserTable({ users, deleteUser, editUser }) {
           </tbody>
         </table>
       ) : (
-        <p style={{ textAlign: "center", color: "red" }}>No users found.</p>
+        <p className="no-users">No users found.</p>
       )}
     </div>
   );

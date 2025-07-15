@@ -26,6 +26,19 @@ body {
   cursor: pointer;
   transition: color 0.2s ease;
 }
+.icon-left {
+  margin-right: 8px;
+}
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+}
+.no-users {
+  text-align: center;
+  color: red;
+  font-size: 1rem;
+  margin-top: 16px;
+}
 
 .back-button:hover {
   color: #000;

@@ -47,18 +47,18 @@ function App() {
           <p>Add and manage your user data easily.</p>
           <div className="hero-buttons">
             <button onClick={() => setShowForm(true)}>
-              <FaUserPlus style={{ marginRight: "8px" }} />
+              <FaUserPlus className="icon-left" />
               Add User
             </button>
 
             {showTable ? (
               <button onClick={() => setShowTable(false)}>
-                <FaUserTimes style={{ marginRight: "8px" }} />
+                <FaUserTimes className="icon-left" />
                 Hide Users
               </button>
             ) : (
               <button onClick={() => setShowTable(true)}>
-                <FaUsers style={{ marginRight: "8px" }} />
+                <FaUsers className="icon-left" />
                 Show Users
               </button>
             )}
