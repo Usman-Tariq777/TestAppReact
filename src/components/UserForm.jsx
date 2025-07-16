@@ -4,8 +4,10 @@ import { FaArrowLeft } from "react-icons/fa";
 function UserForm({ addUser, onCancel }) {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
   const [nameError, setNameError] = useState("");
   const [ageError, setAgeError] = useState("");
+  const [genderError, setGenderError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +15,7 @@ function UserForm({ addUser, onCancel }) {
     let isValid = true;
     setNameError("");
     setAgeError("");
+    setGenderError("");
 
     if (!name.trim()) {
       setNameError("Please enter a name.");
@@ -24,10 +27,16 @@ function UserForm({ addUser, onCancel }) {
       isValid = false;
     }
 
+    if (!gender) {
+      setGenderError("Please select a gender.");
+      isValid = false;
+    }
+
     if (isValid) {
-      addUser(name.trim(), age);
+      addUser(name.trim(), age, gender);
       setName("");
       setAge("");
+      setGender("");
     }
   };
 
@@ -61,6 +70,31 @@ function UserForm({ addUser, onCancel }) {
           min="0"
         />
         {ageError && <p className="error-text">{ageError}</p>}
+      </div>
+
+      <div className="form-control">
+        <label>Gender:</label>
+        <div className="radio-group">
+          <label>
+            <input
+              type="radio"
+              value="Male"
+              checked={gender === "Male"}
+              onChange={() => setGender("Male")}
+            />
+            <span className="radio-label-text">Male</span>
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Female"
+              checked={gender === "Female"}
+              onChange={() => setGender("Female")}
+            />
+            <span className="radio-label-text">Female</span>
+          </label>
+        </div>
+        {genderError && <p className="error-text">{genderError}</p>}
       </div>
 
       <button className="form-button" type="submit">
