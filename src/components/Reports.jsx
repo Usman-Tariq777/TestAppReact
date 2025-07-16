@@ -44,11 +44,29 @@ function Reports({ users }) {
     labels: ["Age < 25", "Others"],
     datasets: [
       {
-        label: "% Under 25",
+        label: "",
         data: [under25Count, total - under25Count],
         backgroundColor: ["#42a5f5", "#ccc"],
       },
     ],
+  };
+
+  const options = {
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const index = context.dataIndex;
+            const value = context.dataset.data[index];
+            if (index === 0) {
+              return `% Under 25: ${value}`;
+            } else {
+              return `Others: ${value}`;
+            }
+          },
+        },
+      },
+    },
   };
 
   const polarData = {
